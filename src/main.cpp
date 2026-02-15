@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/exN1.hpp"
 #include "../include/exN2.hpp"
+#include "../include/exN3.hpp"
 
 int main() {
     int length = 0;
@@ -60,7 +61,16 @@ int main() {
 
     std::cout<<"\n";
     const int res5 = exN2::MaxSumDiagonal(arrMatrix, countMatrix);
-    std::cout<<"Максимум среди сумм элементов диагоналей, параллельных главной диагонали матрицы равен: "<<res5<<"\n";
+    std::cout<<"Максимум среди сумм элементов диагоналей, параллельных главной диагонали матрицы равен: "<<res5<<"\n\n";
+
+    FILE* file = exN3::openFile("../exampleFile/input.txt");
+
+    std::cout<<"Из тестового файла input.txt взят пример английского текста, откуда программа должна прочитать и вывести только те слова, которые начинаются с гласной буквы: ";
+    if (file) {
+        exN3::printWordsStartingWithVowels(file);
+        exN3::closeFile(file);
+    }
+
 
     for (int i = 0; i < countMatrix; i++) {
         delete[] arrMatrix[i];
