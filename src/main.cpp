@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/exN1.hpp"
+#include "../include/exN2.hpp"
 
 int main() {
     int length = 0;
@@ -12,8 +13,9 @@ int main() {
         std::cin>>arrExample1[i];
     }
 
-    exN1::ex1N1 res1 = exN1::SumOdd(arrExample1, length);
-    exN1::ex2N1 res2 = exN1::SumBetweenNegative(arrExample1, length);
+    const exN1::ex1N1 res1 = exN1::SumOdd(arrExample1, length);
+    const exN1::ex2N1 res2 = exN1::SumBetweenNegative(arrExample1, length);
+    const double* res3 = exN1::ArrMoreAbs1(arrExample1, length);
 
     std::cout<<"(1.1) Сумма равна: "<<res1.sum<<";"<<" Количество равно: "<<res1.count<<";";
     std::cout<<" Координаты равны: ";
@@ -26,6 +28,45 @@ int main() {
         std::cout<<". Сумма расположена между элементами имеющими индекс: "<<res2.coordStart<<" и "<<res2.coordEnd<<"\n";
     }
 
+    std::cout<<"\n";
+    std::cout<<"(1.3) Сжатый массив с условием для элементов ( >=|1| ) равен: ";
+    for (int i = 0; i < length; i++) {
+        std::cout<<res3[i]<<" ";
+    }
+
+    std::cout<<"\n"<<"\n";
+    int countMatrix;
+    std::cout<<"Введите количество строк-столбцов квадратной матрицы: ";
+    std::cin>>countMatrix;
+
+    auto arrMatrix = new int *[countMatrix];
+    for (int i = 0; i < countMatrix; i++) {
+        arrMatrix[i] = new int[countMatrix];
+    }
+    std::cout<<"\n";
+    for (int i = 0; i < countMatrix; i++) {
+        std::cout<<"Введите строку, которая поместится в ячейки матрицы с адресами "<<"["<<i<<"][j]: ";
+        for (int j = 0; j < countMatrix; j++) {
+            std::cin>>arrMatrix[i][j];
+        }
+    }
+
+    const exN2::ex1N2 res4 = exN2::MultStrPositive(arrMatrix, countMatrix);
+
+    std::cout<<"\n";
+    for (int i = 0; i < res4.countTrue; i++) {
+        std::cout<<"Произведение элементов в строке с адресом "<<"["<<res4.coordMultStr[i]<<"][j] равно: "<<res4.multiplicationStr[i]<<"\n";
+    }
+
+    std::cout<<"\n";
+    const int res5 = exN2::MaxSumDiagonal(arrMatrix, countMatrix);
+    std::cout<<"Максимум среди сумм элементов диагоналей, параллельных главной диагонали матрицы равен: "<<res5<<"\n";
+
+    for (int i = 0; i < countMatrix; i++) {
+        delete[] arrMatrix[i];
+    }
+    delete[] arrMatrix;
+    delete[] res3;
     delete[] arrExample1;
     return 0;
 }

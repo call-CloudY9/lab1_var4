@@ -53,17 +53,19 @@ exN1::ex2N1 exN1::SumBetweenNegative(const double *arr, const int length) {
 }
 
 double *exN1::ArrMoreAbs1(const double *arr, const int length) {
-    int count = 0;
+    auto* arr_new = new double[length];
+    int j = 0;
     for (int i = 0; i < length; i++) {
-        if (arr[i] >= 1.0 || arr[i] <= -1.0) {
-            count++;
+        if (arr[i] <= -1.0 || arr[i] >= 1.0) {
+            arr_new[j] = arr[i];
+            j++;
         }
     }
-
-    if (count != 0) {
-        auto *arr_ = new double[count];
+    while (j < length) {
+        arr_new[j] = 0;
+        j++;
     }
 
-    
+    return arr_new;
 }
 
